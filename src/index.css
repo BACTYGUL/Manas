@@ -1,0 +1,41 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ─── DARK theme (default) ─── */
+:root, [data-theme="dark"] {
+  --bg-primary:    #0e0b08;
+  --bg-secondary:  #1a1510;
+  --bg-card:       #1a1510;
+  --text-primary:  #f0e6cc;
+  --text-secondary:#c8bfaf;
+  --text-muted:    #7a6f5e;
+  --border:        rgba(201,168,76,0.15);
+  --gold:          #c9a84c;
+}
+
+/* ─── LIGHT theme ─── */
+[data-theme="light"] {
+  --bg-primary:    #f5f0e4;
+  --bg-secondary:  #ede6d4;
+  --bg-card:       #fff9ee;
+  --text-primary:  #1a1208;
+  --text-secondary:#3a3020;
+  --text-muted:    #7a6a50;
+  --border:        rgba(100,80,40,0.18);
+  --gold:          #b8902a;
+}
+
+body {
+  margin: 0; padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+#root { width: 100%; min-height: 100vh; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1,h2,h3,h4,h5,h6 { margin: 0; }
+p { margin: 0; }
+button { cursor: pointer; }

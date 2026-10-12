@@ -1,0 +1,4 @@
+/* App-level resets — конкретные стили в компонентах */
+* {
+  box-sizing: border-box;
+}
