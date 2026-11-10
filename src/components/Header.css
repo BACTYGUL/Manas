@@ -84,9 +84,28 @@
   .header__ctrl-btn:not(.header__login-btn):not(.header__logout) { display: none; }
 }
 
+/* ── LangSwitcher теперь в LangSwitcher.css — здесь только заглушка ── */
+
 /* Admin avatar — золотая рамка */
 .header__user-avatar--admin {
   border-color: #c9a84c;
   background: rgba(201, 168, 76, 0.25);
   color: #c9a84c;
 }
+
+/* Notifications dropdown */
+.header__notif-wrap { position: relative; }
+.notif-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0; width: 300px; z-index: 300;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.3); overflow: hidden;
+}
+.notif-header { padding: 12px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.notif-empty { padding: 16px; text-align: center; font-size: 13px; color: var(--text-muted); }
+.notif-item { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.notif-item:last-child { border-bottom: none; }
+.notif-item.read { opacity: .6; }
+.notif-item p { font-size: 13px; color: var(--text-primary); margin: 0 0 4px; }
+.notif-status { font-size: 12px; color: #c9a84c !important; }
+.notif-mark { background: none; border: none; color: #c9a84c; font-size: 12px; cursor: pointer; padding: 4px 0; font-family: inherit; text-decoration: underline; }

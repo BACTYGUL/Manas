@@ -103,3 +103,33 @@
     justify-content: flex-start;
   }
 }
+
+/* ── Правая колонка (соцсети + телефон) ── */
+.footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.footer__phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #c9a84c;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  text-decoration: none;
+  letter-spacing: .03em;
+  transition: color .2s;
+  white-space: nowrap;
+}
+
+.footer__phone:hover { color: #e0bc5e; }
+
+@media (max-width: 768px) {
+  .footer__right {
+    align-items: flex-start;
+  }
+}

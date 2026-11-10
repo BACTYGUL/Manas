@@ -1,0 +1,176 @@
+/* ══════════════════════════════════════════
+   LangSwitcher — переключатель языков
+══════════════════════════════════════════ */
+.ls-wrap {
+  position: relative;
+}
+
+/* ── Кнопка-триггер ── */
+.ls-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--border, rgba(201,168,76,.18));
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-secondary, #a09580);
+  transition: all .18s;
+  white-space: nowrap;
+  height: 36px;
+}
+
+.ls-trigger:hover,
+.ls-trigger--open {
+  border-color: #c9a84c;
+  color: #c9a84c;
+  background: rgba(201,168,76,.07);
+}
+
+.ls-flag   { font-size: 18px; line-height: 1; }
+.ls-code   { font-size: 12px; font-weight: 700; letter-spacing: .05em; }
+.ls-chevron{ font-size: 10px; color: var(--text-muted, #7a6f5e); transition: transform .2s; }
+.ls-trigger--open .ls-chevron { transform: rotate(180deg); }
+
+/* ── Выпадающий список ── */
+.ls-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 9999;
+  width: 320px;
+  background: var(--bg-card, #1a1510);
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 14px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.55);
+  overflow: hidden;
+  animation: lsOpen .18s ease;
+}
+
+@keyframes lsOpen {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Поиск ── */
+.ls-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: sticky;
+  top: 0;
+  background: var(--bg-card, #1a1510);
+  z-index: 1;
+}
+
+.ls-search-icon { font-size: 14px; flex-shrink: 0; }
+
+.ls-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text-primary, #f0e6cc);
+}
+
+.ls-search::placeholder {
+  color: var(--text-muted, #7a6f5e);
+}
+
+.ls-clear {
+  background: none;
+  border: none;
+  color: var(--text-muted, #7a6f5e);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+
+/* ── Список ── */
+.ls-list {
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,.2) transparent;
+}
+
+.ls-list::-webkit-scrollbar { width: 4px; }
+.ls-list::-webkit-scrollbar-thumb { background: rgba(201,168,76,.2); border-radius: 2px; }
+
+/* ── Регион ── */
+.ls-region {
+  padding: 7px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  background: rgba(201,168,76,.04);
+  position: sticky;
+  top: 0;
+}
+
+/* ── Опция языка ── */
+.ls-option {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  transition: background .12s;
+  color: var(--text-secondary, #a09580);
+}
+
+.ls-option:hover {
+  background: rgba(201,168,76,.08);
+  color: var(--text-primary, #f0e6cc);
+}
+
+.ls-option--active {
+  background: rgba(201,168,76,.14);
+  color: #c9a84c;
+  font-weight: 600;
+}
+
+.ls-opt-flag   { font-size: 18px; flex-shrink: 0; }
+.ls-opt-native { flex: 1; font-size: 14px; }
+.ls-opt-en     { font-size: 11px; color: var(--text-muted, #7a6f5e); white-space: nowrap; }
+.ls-opt-check  { color: #c9a84c; font-size: 14px; font-weight: 700; margin-left: 4px; }
+
+/* ── Нет результатов ── */
+.ls-no-result {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted, #7a6f5e);
+  font-size: 13px;
+}
+
+/* ── Подвал ── */
+.ls-footer {
+  padding: 8px 14px;
+  border-top: 1px solid rgba(255,255,255,.05);
+  font-size: 11px;
+  color: var(--text-muted, #7a6f5e);
+  text-align: center;
+}
+
+/* ── Адаптив ── */
+@media (max-width: 480px) {
+  .ls-dropdown {
+    width: calc(100vw - 24px);
+    right: -12px;
+  }
+}

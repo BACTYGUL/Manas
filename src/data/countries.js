@@ -1,0 +1,223 @@
+/**
+ * Полный список стран с флагами, кодами и минимальной длиной номера.
+ * minLen — минимум цифр ПОСЛЕ кода страны.
+ * maxLen — максимум цифр ПОСЛЕ кода страны.
+ */
+
+export const CONTINENTS = {
+  asia:          { ky: 'Азия',                             ru: 'Азия',                              en: 'Asia' },
+  europe:        { ky: 'Европа',                           ru: 'Европа',                            en: 'Europe' },
+  north_america: { ky: 'Түндүк жана Борбордук Америка',    ru: 'Северная и Центральная Америка',     en: 'North & Central America' },
+  south_america: { ky: 'Түштүк Америка',                   ru: 'Южная Америка',                     en: 'South America' },
+  africa:        { ky: 'Африка',                           ru: 'Африка',                            en: 'Africa' },
+  oceania:       { ky: 'Океания',                          ru: 'Океания',                           en: 'Oceania' },
+};
+
+const COUNTRIES = [
+  // ── ASIA ──────────────────────────────────────────────────────────────────
+  { code:'KG', flag:'🇰🇬', dial:'+996', continent:'asia', minLen:9,  maxLen:9,  ky:'Кыргызстан',                   ru:'Кыргызстан',                  en:'Kyrgyzstan' },
+  { code:'KZ', flag:'🇰🇿', dial:'+7',   continent:'asia', minLen:10, maxLen:10, ky:'Казакстан',                    ru:'Казахстан',                   en:'Kazakhstan' },
+  { code:'UZ', flag:'🇺🇿', dial:'+998', continent:'asia', minLen:9,  maxLen:9,  ky:'Өзбекстан',                    ru:'Узбекистан',                  en:'Uzbekistan' },
+  { code:'TJ', flag:'🇹🇯', dial:'+992', continent:'asia', minLen:9,  maxLen:9,  ky:'Тажикстан',                    ru:'Таджикистан',                 en:'Tajikistan' },
+  { code:'TM', flag:'🇹🇲', dial:'+993', continent:'asia', minLen:8,  maxLen:8,  ky:'Түркмөнстан',                  ru:'Туркменистан',                en:'Turkmenistan' },
+  { code:'RU', flag:'🇷🇺', dial:'+7',   continent:'asia', minLen:10, maxLen:10, ky:'Россия',                       ru:'Россия',                      en:'Russia' },
+  { code:'CN', flag:'🇨🇳', dial:'+86',  continent:'asia', minLen:11, maxLen:11, ky:'Кытай',                        ru:'Китай',                       en:'China' },
+  { code:'JP', flag:'🇯🇵', dial:'+81',  continent:'asia', minLen:10, maxLen:11, ky:'Япония',                       ru:'Япония',                      en:'Japan' },
+  { code:'KR', flag:'🇰🇷', dial:'+82',  continent:'asia', minLen:9,  maxLen:11, ky:'Түштүк Корея',                 ru:'Южная Корея',                 en:'South Korea' },
+  { code:'KP', flag:'🇰🇵', dial:'+850', continent:'asia', minLen:7,  maxLen:10, ky:'Түндүк Корея',                 ru:'Северная Корея',              en:'North Korea' },
+  { code:'MN', flag:'🇲🇳', dial:'+976', continent:'asia', minLen:8,  maxLen:8,  ky:'Монголия',                     ru:'Монголия',                    en:'Mongolia' },
+  { code:'IN', flag:'🇮🇳', dial:'+91',  continent:'asia', minLen:10, maxLen:10, ky:'Индия',                        ru:'Индия',                       en:'India' },
+  { code:'PK', flag:'🇵🇰', dial:'+92',  continent:'asia', minLen:10, maxLen:10, ky:'Пакистан',                     ru:'Пакистан',                    en:'Pakistan' },
+  { code:'AF', flag:'🇦🇫', dial:'+93',  continent:'asia', minLen:9,  maxLen:9,  ky:'Афганстан',                    ru:'Афганистан',                  en:'Afghanistan' },
+  { code:'BD', flag:'🇧🇩', dial:'+880', continent:'asia', minLen:10, maxLen:10, ky:'Бангладеш',                    ru:'Бангладеш',                   en:'Bangladesh' },
+  { code:'NP', flag:'🇳🇵', dial:'+977', continent:'asia', minLen:10, maxLen:10, ky:'Непал',                        ru:'Непал',                       en:'Nepal' },
+  { code:'BT', flag:'🇧🇹', dial:'+975', continent:'asia', minLen:8,  maxLen:8,  ky:'Бутан',                        ru:'Бутан',                       en:'Bhutan' },
+  { code:'LK', flag:'🇱🇰', dial:'+94',  continent:'asia', minLen:9,  maxLen:9,  ky:'Шри-Ланка',                    ru:'Шри-Ланка',                   en:'Sri Lanka' },
+  { code:'MV', flag:'🇲🇻', dial:'+960', continent:'asia', minLen:7,  maxLen:7,  ky:'Мальдив аралдары',             ru:'Мальдивские острова',         en:'Maldives' },
+  { code:'MM', flag:'🇲🇲', dial:'+95',  continent:'asia', minLen:9,  maxLen:10, ky:'Мьянма',                       ru:'Мьянма',                      en:'Myanmar' },
+  { code:'TH', flag:'🇹🇭', dial:'+66',  continent:'asia', minLen:9,  maxLen:9,  ky:'Таиланд',                      ru:'Таиланд',                     en:'Thailand' },
+  { code:'VN', flag:'🇻🇳', dial:'+84',  continent:'asia', minLen:9,  maxLen:10, ky:'Вьетнам',                      ru:'Вьетнам',                     en:'Vietnam' },
+  { code:'LA', flag:'🇱🇦', dial:'+856', continent:'asia', minLen:8,  maxLen:9,  ky:'Лаос',                         ru:'Лаос',                        en:'Laos' },
+  { code:'KH', flag:'🇰🇭', dial:'+855', continent:'asia', minLen:8,  maxLen:9,  ky:'Камбоджа',                     ru:'Камбоджа',                    en:'Cambodia' },
+  { code:'MY', flag:'🇲🇾', dial:'+60',  continent:'asia', minLen:9,  maxLen:10, ky:'Малайзия',                     ru:'Малайзия',                    en:'Malaysia' },
+  { code:'SG', flag:'🇸🇬', dial:'+65',  continent:'asia', minLen:8,  maxLen:8,  ky:'Сингапур',                     ru:'Сингапур',                    en:'Singapore' },
+  { code:'ID', flag:'🇮🇩', dial:'+62',  continent:'asia', minLen:9,  maxLen:12, ky:'Индонезия',                    ru:'Индонезия',                   en:'Indonesia' },
+  { code:'PH', flag:'🇵🇭', dial:'+63',  continent:'asia', minLen:10, maxLen:10, ky:'Филиппин',                     ru:'Филиппины',                   en:'Philippines' },
+  { code:'BN', flag:'🇧🇳', dial:'+673', continent:'asia', minLen:7,  maxLen:7,  ky:'Бруней',                       ru:'Бруней',                      en:'Brunei' },
+  { code:'TL', flag:'🇹🇱', dial:'+670', continent:'asia', minLen:7,  maxLen:8,  ky:'Тимор-Лесте',                  ru:'Тимор-Лесте',                 en:'Timor-Leste' },
+  { code:'TR', flag:'🇹🇷', dial:'+90',  continent:'asia', minLen:10, maxLen:10, ky:'Түркия',                       ru:'Турция',                      en:'Turkey' },
+  { code:'SA', flag:'🇸🇦', dial:'+966', continent:'asia', minLen:9,  maxLen:9,  ky:'Сауд Арабиясы',                ru:'Саудовская Аравия',           en:'Saudi Arabia' },
+  { code:'AE', flag:'🇦🇪', dial:'+971', continent:'asia', minLen:9,  maxLen:9,  ky:'Бириккен Араб Эмираттары',     ru:'ОАЭ',                         en:'UAE' },
+  { code:'QA', flag:'🇶🇦', dial:'+974', continent:'asia', minLen:8,  maxLen:8,  ky:'Катар',                        ru:'Катар',                       en:'Qatar' },
+  { code:'KW', flag:'🇰🇼', dial:'+965', continent:'asia', minLen:8,  maxLen:8,  ky:'Кувейт',                       ru:'Кувейт',                      en:'Kuwait' },
+  { code:'BH', flag:'🇧🇭', dial:'+973', continent:'asia', minLen:8,  maxLen:8,  ky:'Бахрейн',                      ru:'Бахрейн',                     en:'Bahrain' },
+  { code:'OM', flag:'🇴🇲', dial:'+968', continent:'asia', minLen:8,  maxLen:8,  ky:'Оман',                         ru:'Оман',                        en:'Oman' },
+  { code:'YE', flag:'🇾🇪', dial:'+967', continent:'asia', minLen:9,  maxLen:9,  ky:'Йемен',                        ru:'Йемен',                       en:'Yemen' },
+  { code:'IR', flag:'🇮🇷', dial:'+98',  continent:'asia', minLen:10, maxLen:10, ky:'Иран',                         ru:'Иран',                        en:'Iran' },
+  { code:'IQ', flag:'🇮🇶', dial:'+964', continent:'asia', minLen:10, maxLen:10, ky:'Ирак',                         ru:'Ирак',                        en:'Iraq' },
+  { code:'SY', flag:'🇸🇾', dial:'+963', continent:'asia', minLen:9,  maxLen:9,  ky:'Сирия',                        ru:'Сирия',                       en:'Syria' },
+  { code:'LB', flag:'🇱🇧', dial:'+961', continent:'asia', minLen:7,  maxLen:8,  ky:'Ливан',                        ru:'Ливан',                       en:'Lebanon' },
+  { code:'JO', flag:'🇯🇴', dial:'+962', continent:'asia', minLen:9,  maxLen:9,  ky:'Иордания',                     ru:'Иордания',                    en:'Jordan' },
+  { code:'IL', flag:'🇮🇱', dial:'+972', continent:'asia', minLen:9,  maxLen:9,  ky:'Израиль',                      ru:'Израиль',                     en:'Israel' },
+  { code:'PS', flag:'🇵🇸', dial:'+970', continent:'asia', minLen:9,  maxLen:9,  ky:'Палестина',                    ru:'Палестина',                   en:'Palestine' },
+  { code:'AM', flag:'🇦🇲', dial:'+374', continent:'asia', minLen:8,  maxLen:8,  ky:'Армения',                      ru:'Армения',                     en:'Armenia' },
+  { code:'AZ', flag:'🇦🇿', dial:'+994', continent:'asia', minLen:9,  maxLen:9,  ky:'Азербайжан',                   ru:'Азербайджан',                 en:'Azerbaijan' },
+  { code:'GE', flag:'🇬🇪', dial:'+995', continent:'asia', minLen:9,  maxLen:9,  ky:'Грузия',                       ru:'Грузия',                      en:'Georgia' },
+  { code:'CY', flag:'🇨🇾', dial:'+357', continent:'asia', minLen:8,  maxLen:8,  ky:'Кипр',                         ru:'Кипр',                        en:'Cyprus' },
+
+  // ── EUROPE ─────────────────────────────────────────────────────────────────
+  { code:'DE', flag:'🇩🇪', dial:'+49',  continent:'europe', minLen:10, maxLen:12, ky:'Германия',                   ru:'Германия',                    en:'Germany' },
+  { code:'FR', flag:'🇫🇷', dial:'+33',  continent:'europe', minLen:9,  maxLen:9,  ky:'Франция',                    ru:'Франция',                     en:'France' },
+  { code:'IT', flag:'🇮🇹', dial:'+39',  continent:'europe', minLen:9,  maxLen:11, ky:'Италия',                     ru:'Италия',                      en:'Italy' },
+  { code:'ES', flag:'🇪🇸', dial:'+34',  continent:'europe', minLen:9,  maxLen:9,  ky:'Испания',                    ru:'Испания',                     en:'Spain' },
+  { code:'PT', flag:'🇵🇹', dial:'+351', continent:'europe', minLen:9,  maxLen:9,  ky:'Португалия',                 ru:'Португалия',                  en:'Portugal' },
+  { code:'GB', flag:'🇬🇧', dial:'+44',  continent:'europe', minLen:10, maxLen:10, ky:'Улуу Британия',              ru:'Великобритания',              en:'United Kingdom' },
+  { code:'IE', flag:'🇮🇪', dial:'+353', continent:'europe', minLen:9,  maxLen:9,  ky:'Ирландия',                   ru:'Ирландия',                    en:'Ireland' },
+  { code:'NL', flag:'🇳🇱', dial:'+31',  continent:'europe', minLen:9,  maxLen:9,  ky:'Нидерланддар',               ru:'Нидерланды',                  en:'Netherlands' },
+  { code:'BE', flag:'🇧🇪', dial:'+32',  continent:'europe', minLen:9,  maxLen:9,  ky:'Бельгия',                    ru:'Бельгия',                     en:'Belgium' },
+  { code:'LU', flag:'🇱🇺', dial:'+352', continent:'europe', minLen:9,  maxLen:9,  ky:'Люксембург',                 ru:'Люксембург',                  en:'Luxembourg' },
+  { code:'CH', flag:'🇨🇭', dial:'+41',  continent:'europe', minLen:9,  maxLen:9,  ky:'Швейцария',                  ru:'Швейцария',                   en:'Switzerland' },
+  { code:'AT', flag:'🇦🇹', dial:'+43',  continent:'europe', minLen:10, maxLen:13, ky:'Австрия',                    ru:'Австрия',                     en:'Austria' },
+  { code:'PL', flag:'🇵🇱', dial:'+48',  continent:'europe', minLen:9,  maxLen:9,  ky:'Польша',                     ru:'Польша',                      en:'Poland' },
+  { code:'CZ', flag:'🇨🇿', dial:'+420', continent:'europe', minLen:9,  maxLen:9,  ky:'Чехия',                      ru:'Чехия',                       en:'Czechia' },
+  { code:'SK', flag:'🇸🇰', dial:'+421', continent:'europe', minLen:9,  maxLen:9,  ky:'Словакия',                   ru:'Словакия',                    en:'Slovakia' },
+  { code:'HU', flag:'🇭🇺', dial:'+36',  continent:'europe', minLen:9,  maxLen:9,  ky:'Венгрия',                    ru:'Венгрия',                     en:'Hungary' },
+  { code:'RO', flag:'🇷🇴', dial:'+40',  continent:'europe', minLen:9,  maxLen:9,  ky:'Румыния',                    ru:'Румыния',                     en:'Romania' },
+  { code:'BG', flag:'🇧🇬', dial:'+359', continent:'europe', minLen:8,  maxLen:9,  ky:'Болгария',                   ru:'Болгария',                    en:'Bulgaria' },
+  { code:'GR', flag:'🇬🇷', dial:'+30',  continent:'europe', minLen:10, maxLen:10, ky:'Греция',                     ru:'Греция',                      en:'Greece' },
+  { code:'AL', flag:'🇦🇱', dial:'+355', continent:'europe', minLen:9,  maxLen:9,  ky:'Албания',                    ru:'Албания',                     en:'Albania' },
+  { code:'MK', flag:'🇲🇰', dial:'+389', continent:'europe', minLen:8,  maxLen:8,  ky:'Түндүк Македония',           ru:'Северная Македония',          en:'North Macedonia' },
+  { code:'RS', flag:'🇷🇸', dial:'+381', continent:'europe', minLen:8,  maxLen:9,  ky:'Сербия',                     ru:'Сербия',                      en:'Serbia' },
+  { code:'ME', flag:'🇲🇪', dial:'+382', continent:'europe', minLen:8,  maxLen:8,  ky:'Черногория',                 ru:'Черногория',                  en:'Montenegro' },
+  { code:'BA', flag:'🇧🇦', dial:'+387', continent:'europe', minLen:8,  maxLen:8,  ky:'Босния жана Герцеговина',    ru:'Босния и Герцеговина',        en:'Bosnia and Herzegovina' },
+  { code:'HR', flag:'🇭🇷', dial:'+385', continent:'europe', minLen:8,  maxLen:9,  ky:'Хорватия',                   ru:'Хорватия',                    en:'Croatia' },
+  { code:'SI', flag:'🇸🇮', dial:'+386', continent:'europe', minLen:8,  maxLen:8,  ky:'Словения',                   ru:'Словения',                    en:'Slovenia' },
+  { code:'DK', flag:'🇩🇰', dial:'+45',  continent:'europe', minLen:8,  maxLen:8,  ky:'Дания',                      ru:'Дания',                       en:'Denmark' },
+  { code:'NO', flag:'🇳🇴', dial:'+47',  continent:'europe', minLen:8,  maxLen:8,  ky:'Норвегия',                   ru:'Норвегия',                    en:'Norway' },
+  { code:'SE', flag:'🇸🇪', dial:'+46',  continent:'europe', minLen:7,  maxLen:10, ky:'Швеция',                     ru:'Швеция',                      en:'Sweden' },
+  { code:'FI', flag:'🇫🇮', dial:'+358', continent:'europe', minLen:9,  maxLen:12, ky:'Финляндия',                  ru:'Финляндия',                   en:'Finland' },
+  { code:'IS', flag:'🇮🇸', dial:'+354', continent:'europe', minLen:7,  maxLen:7,  ky:'Исландия',                   ru:'Исландия',                    en:'Iceland' },
+  { code:'EE', flag:'🇪🇪', dial:'+372', continent:'europe', minLen:7,  maxLen:8,  ky:'Эстония',                    ru:'Эстония',                     en:'Estonia' },
+  { code:'LV', flag:'🇱🇻', dial:'+371', continent:'europe', minLen:8,  maxLen:8,  ky:'Латвия',                     ru:'Латвия',                      en:'Latvia' },
+  { code:'LT', flag:'🇱🇹', dial:'+370', continent:'europe', minLen:8,  maxLen:8,  ky:'Литва',                      ru:'Литва',                       en:'Lithuania' },
+  { code:'UA', flag:'🇺🇦', dial:'+380', continent:'europe', minLen:9,  maxLen:9,  ky:'Украина',                    ru:'Украина',                     en:'Ukraine' },
+  { code:'BY', flag:'🇧🇾', dial:'+375', continent:'europe', minLen:9,  maxLen:9,  ky:'Беларусь',                   ru:'Беларусь',                    en:'Belarus' },
+  { code:'MD', flag:'🇲🇩', dial:'+373', continent:'europe', minLen:8,  maxLen:8,  ky:'Молдова',                    ru:'Молдова',                     en:'Moldova' },
+  { code:'MT', flag:'🇲🇹', dial:'+356', continent:'europe', minLen:8,  maxLen:8,  ky:'Мальта',                     ru:'Мальта',                      en:'Malta' },
+  { code:'AD', flag:'🇦🇩', dial:'+376', continent:'europe', minLen:6,  maxLen:6,  ky:'Андорра',                    ru:'Андорра',                     en:'Andorra' },
+  { code:'MC', flag:'🇲🇨', dial:'+377', continent:'europe', minLen:8,  maxLen:9,  ky:'Монако',                     ru:'Монако',                      en:'Monaco' },
+  { code:'SM', flag:'🇸🇲', dial:'+378', continent:'europe', minLen:6,  maxLen:10, ky:'Сан-Марино',                 ru:'Сан-Марино',                  en:'San Marino' },
+  { code:'VA', flag:'🇻🇦', dial:'+39',  continent:'europe', minLen:9,  maxLen:11, ky:'Ватикан',                    ru:'Ватикан',                     en:'Vatican' },
+  { code:'LI', flag:'🇱🇮', dial:'+423', continent:'europe', minLen:7,  maxLen:9,  ky:'Лихтенштейн',                ru:'Лихтенштейн',                 en:'Liechtenstein' },
+
+  // ── NORTH & CENTRAL AMERICA ───────────────────────────────────────────────
+  { code:'US', flag:'🇺🇸', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Америка Кошмо Штаттары', ru:'США',                    en:'USA' },
+  { code:'CA', flag:'🇨🇦', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Канада',                  ru:'Канада',                 en:'Canada' },
+  { code:'MX', flag:'🇲🇽', dial:'+52',  continent:'north_america', minLen:10, maxLen:10, ky:'Мексика',                 ru:'Мексика',                en:'Mexico' },
+  { code:'GT', flag:'🇬🇹', dial:'+502', continent:'north_america', minLen:8,  maxLen:8,  ky:'Гватемала',               ru:'Гватемала',              en:'Guatemala' },
+  { code:'BZ', flag:'🇧🇿', dial:'+501', continent:'north_america', minLen:7,  maxLen:7,  ky:'Белиз',                   ru:'Белиз',                  en:'Belize' },
+  { code:'HN', flag:'🇭🇳', dial:'+504', continent:'north_america', minLen:8,  maxLen:8,  ky:'Гондурас',                ru:'Гондурас',               en:'Honduras' },
+  { code:'SV', flag:'🇸🇻', dial:'+503', continent:'north_america', minLen:8,  maxLen:8,  ky:'Сальвадор',               ru:'Сальвадор',              en:'El Salvador' },
+  { code:'NI', flag:'🇳🇮', dial:'+505', continent:'north_america', minLen:8,  maxLen:8,  ky:'Никарагуа',               ru:'Никарагуа',              en:'Nicaragua' },
+  { code:'CR', flag:'🇨🇷', dial:'+506', continent:'north_america', minLen:8,  maxLen:8,  ky:'Коста-Рика',              ru:'Коста-Рика',             en:'Costa Rica' },
+  { code:'PA', flag:'🇵🇦', dial:'+507', continent:'north_america', minLen:8,  maxLen:8,  ky:'Панама',                  ru:'Панама',                 en:'Panama' },
+  { code:'CU', flag:'🇨🇺', dial:'+53',  continent:'north_america', minLen:8,  maxLen:8,  ky:'Куба',                    ru:'Куба',                   en:'Cuba' },
+  { code:'JM', flag:'🇯🇲', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Ямайка',                  ru:'Ямайка',                 en:'Jamaica' },
+  { code:'HT', flag:'🇭🇹', dial:'+509', continent:'north_america', minLen:8,  maxLen:8,  ky:'Гаити',                   ru:'Гаити',                  en:'Haiti' },
+  { code:'DO', flag:'🇩🇴', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Доминикан Республикасы',  ru:'Доминиканская Республика', en:'Dominican Republic' },
+  { code:'BS', flag:'🇧🇸', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Багам аралдары',           ru:'Багамские острова',      en:'Bahamas' },
+  { code:'BB', flag:'🇧🇧', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Барбадос',                ru:'Барбадос',               en:'Barbados' },
+  { code:'TT', flag:'🇹🇹', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Тринидад жана Тобаго',    ru:'Тринидад и Тобаго',      en:'Trinidad and Tobago' },
+  { code:'GD', flag:'🇬🇩', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Гренада',                 ru:'Гренада',                en:'Grenada' },
+  { code:'DM', flag:'🇩🇲', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Доминика',                ru:'Доминика',               en:'Dominica' },
+  { code:'LC', flag:'🇱🇨', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Сент-Люсия',              ru:'Сент-Люсия',             en:'Saint Lucia' },
+  { code:'AG', flag:'🇦🇬', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Антигуа жана Барбуда',    ru:'Антигуа и Барбуда',      en:'Antigua and Barbuda' },
+  { code:'KN', flag:'🇰🇳', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Сент-Китс жана Невис',    ru:'Сент-Китс и Невис',      en:'Saint Kitts and Nevis' },
+  { code:'VC', flag:'🇻🇨', dial:'+1',   continent:'north_america', minLen:10, maxLen:10, ky:'Сент-Винсент жана Гренадиндер', ru:'Сент-Винсент и Гренадины', en:'Saint Vincent and the Grenadines' },
+
+  // ── SOUTH AMERICA ─────────────────────────────────────────────────────────
+  { code:'CO', flag:'🇨🇴', dial:'+57',  continent:'south_america', minLen:10, maxLen:10, ky:'Колумбия',  ru:'Колумбия',  en:'Colombia' },
+  { code:'VE', flag:'🇻🇪', dial:'+58',  continent:'south_america', minLen:10, maxLen:10, ky:'Венесуэла', ru:'Венесуэла', en:'Venezuela' },
+  { code:'EC', flag:'🇪🇨', dial:'+593', continent:'south_america', minLen:9,  maxLen:9,  ky:'Эквадор',   ru:'Эквадор',   en:'Ecuador' },
+  { code:'PE', flag:'🇵🇪', dial:'+51',  continent:'south_america', minLen:9,  maxLen:9,  ky:'Перу',      ru:'Перу',      en:'Peru' },
+  { code:'BO', flag:'🇧🇴', dial:'+591', continent:'south_america', minLen:8,  maxLen:8,  ky:'Боливия',   ru:'Боливия',   en:'Bolivia' },
+  { code:'CL', flag:'🇨🇱', dial:'+56',  continent:'south_america', minLen:9,  maxLen:9,  ky:'Чили',      ru:'Чили',      en:'Chile' },
+  { code:'AR', flag:'🇦🇷', dial:'+54',  continent:'south_america', minLen:10, maxLen:10, ky:'Аргентина', ru:'Аргентина', en:'Argentina' },
+  { code:'UY', flag:'🇺🇾', dial:'+598', continent:'south_america', minLen:8,  maxLen:8,  ky:'Уругвай',   ru:'Уругвай',   en:'Uruguay' },
+  { code:'PY', flag:'🇵🇾', dial:'+595', continent:'south_america', minLen:9,  maxLen:9,  ky:'Парагвай',  ru:'Парагвай',  en:'Paraguay' },
+  { code:'BR', flag:'🇧🇷', dial:'+55',  continent:'south_america', minLen:11, maxLen:11, ky:'Бразилия',  ru:'Бразилия',  en:'Brazil' },
+  { code:'GY', flag:'🇬🇾', dial:'+592', continent:'south_america', minLen:7,  maxLen:7,  ky:'Гайана',    ru:'Гайана',    en:'Guyana' },
+  { code:'SR', flag:'🇸🇷', dial:'+597', continent:'south_america', minLen:7,  maxLen:7,  ky:'Суринам',   ru:'Суринам',   en:'Suriname' },
+
+  // ── AFRICA ────────────────────────────────────────────────────────────────
+  { code:'NG', flag:'🇳🇬', dial:'+234', continent:'africa', minLen:10, maxLen:10, ky:'Нигерия',             ru:'Нигерия',              en:'Nigeria' },
+  { code:'EG', flag:'🇪🇬', dial:'+20',  continent:'africa', minLen:10, maxLen:10, ky:'Египет',              ru:'Египет',               en:'Egypt' },
+  { code:'ZA', flag:'🇿🇦', dial:'+27',  continent:'africa', minLen:9,  maxLen:9,  ky:'Түштүк Африка',       ru:'ЮАР',                  en:'South Africa' },
+  { code:'ET', flag:'🇪🇹', dial:'+251', continent:'africa', minLen:9,  maxLen:9,  ky:'Эфиопия',             ru:'Эфиопия',              en:'Ethiopia' },
+  { code:'KE', flag:'🇰🇪', dial:'+254', continent:'africa', minLen:9,  maxLen:9,  ky:'Кения',               ru:'Кения',                en:'Kenya' },
+  { code:'GH', flag:'🇬🇭', dial:'+233', continent:'africa', minLen:9,  maxLen:9,  ky:'Гана',                ru:'Гана',                 en:'Ghana' },
+  { code:'TZ', flag:'🇹🇿', dial:'+255', continent:'africa', minLen:9,  maxLen:9,  ky:'Танзания',            ru:'Танзания',             en:'Tanzania' },
+  { code:'UG', flag:'🇺🇬', dial:'+256', continent:'africa', minLen:9,  maxLen:9,  ky:'Уганда',              ru:'Уганда',               en:'Uganda' },
+  { code:'MA', flag:'🇲🇦', dial:'+212', continent:'africa', minLen:9,  maxLen:9,  ky:'Марокко',             ru:'Марокко',              en:'Morocco' },
+  { code:'DZ', flag:'🇩🇿', dial:'+213', continent:'africa', minLen:9,  maxLen:9,  ky:'Алжир',               ru:'Алжир',                en:'Algeria' },
+  { code:'TN', flag:'🇹🇳', dial:'+216', continent:'africa', minLen:8,  maxLen:8,  ky:'Тунис',               ru:'Тунис',                en:'Tunisia' },
+  { code:'LY', flag:'🇱🇾', dial:'+218', continent:'africa', minLen:9,  maxLen:9,  ky:'Ливия',               ru:'Ливия',                en:'Libya' },
+  { code:'SD', flag:'🇸🇩', dial:'+249', continent:'africa', minLen:9,  maxLen:9,  ky:'Судан',               ru:'Судан',                en:'Sudan' },
+  { code:'CM', flag:'🇨🇲', dial:'+237', continent:'africa', minLen:9,  maxLen:9,  ky:'Камерун',             ru:'Камерун',              en:'Cameroon' },
+  { code:'CI', flag:'🇨🇮', dial:'+225', continent:'africa', minLen:10, maxLen:10, ky:'Кот-д\'Ивуар',        ru:'Кот-д\'Ивуар',         en:"Côte d'Ivoire" },
+  { code:'SN', flag:'🇸🇳', dial:'+221', continent:'africa', minLen:9,  maxLen:9,  ky:'Сенегал',             ru:'Сенегал',              en:'Senegal' },
+  { code:'ML', flag:'🇲🇱', dial:'+223', continent:'africa', minLen:8,  maxLen:8,  ky:'Мали',                ru:'Мали',                 en:'Mali' },
+  { code:'AO', flag:'🇦🇴', dial:'+244', continent:'africa', minLen:9,  maxLen:9,  ky:'Ангола',              ru:'Ангола',               en:'Angola' },
+  { code:'MZ', flag:'🇲🇿', dial:'+258', continent:'africa', minLen:9,  maxLen:9,  ky:'Мозамбик',            ru:'Мозамбик',             en:'Mozambique' },
+  { code:'ZM', flag:'🇿🇲', dial:'+260', continent:'africa', minLen:9,  maxLen:9,  ky:'Замбия',              ru:'Замбия',               en:'Zambia' },
+  { code:'ZW', flag:'🇿🇼', dial:'+263', continent:'africa', minLen:9,  maxLen:9,  ky:'Зимбабве',            ru:'Зимбабве',             en:'Zimbabwe' },
+  { code:'RW', flag:'🇷🇼', dial:'+250', continent:'africa', minLen:9,  maxLen:9,  ky:'Руанда',              ru:'Руанда',               en:'Rwanda' },
+  { code:'MG', flag:'🇲🇬', dial:'+261', continent:'africa', minLen:9,  maxLen:9,  ky:'Мадагаскар',          ru:'Мадагаскар',           en:'Madagascar' },
+  { code:'SO', flag:'🇸🇴', dial:'+252', continent:'africa', minLen:8,  maxLen:8,  ky:'Сомали',              ru:'Сомали',               en:'Somalia' },
+  { code:'NA', flag:'🇳🇦', dial:'+264', continent:'africa', minLen:9,  maxLen:9,  ky:'Намибия',             ru:'Намибия',              en:'Namibia' },
+  { code:'BW', flag:'🇧🇼', dial:'+267', continent:'africa', minLen:8,  maxLen:8,  ky:'Ботсвана',            ru:'Ботсвана',             en:'Botswana' },
+  { code:'MU', flag:'🇲🇺', dial:'+230', continent:'africa', minLen:8,  maxLen:8,  ky:'Маврикий',            ru:'Маврикий',             en:'Mauritius' },
+  { code:'LS', flag:'🇱🇸', dial:'+266', continent:'africa', minLen:8,  maxLen:8,  ky:'Лесото',              ru:'Лесото',               en:'Lesotho' },
+  { code:'ER', flag:'🇪🇷', dial:'+291', continent:'africa', minLen:7,  maxLen:7,  ky:'Эритрея',             ru:'Эритрея',              en:'Eritrea' },
+  { code:'DJ', flag:'🇩🇯', dial:'+253', continent:'africa', minLen:8,  maxLen:8,  ky:'Джибути',             ru:'Джибути',              en:'Djibouti' },
+  { code:'CV', flag:'🇨🇻', dial:'+238', continent:'africa', minLen:7,  maxLen:7,  ky:'Кабо-Верде',          ru:'Кабо-Верде',           en:'Cape Verde' },
+  { code:'SC', flag:'🇸🇨', dial:'+248', continent:'africa', minLen:7,  maxLen:7,  ky:'Сейшел',              ru:'Сейшелы',              en:'Seychelles' },
+  { code:'BF', flag:'🇧🇫', dial:'+226', continent:'africa', minLen:8,  maxLen:8,  ky:'Буркина-Фасо',        ru:'Буркина-Фасо',         en:'Burkina Faso' },
+
+  // ── OCEANIA ───────────────────────────────────────────────────────────────
+  { code:'AU', flag:'🇦🇺', dial:'+61',  continent:'oceania', minLen:9,  maxLen:9,  ky:'Австралия',         ru:'Австралия',          en:'Australia' },
+  { code:'NZ', flag:'🇳🇿', dial:'+64',  continent:'oceania', minLen:8,  maxLen:9,  ky:'Жаңы Зеландия',     ru:'Новая Зеландия',     en:'New Zealand' },
+  { code:'PG', flag:'🇵🇬', dial:'+675', continent:'oceania', minLen:8,  maxLen:8,  ky:'Папуа-Жаңы Гвинея', ru:'Папуа — Новая Гвинея', en:'Papua New Guinea' },
+  { code:'FJ', flag:'🇫🇯', dial:'+679', continent:'oceania', minLen:7,  maxLen:7,  ky:'Фижи',              ru:'Фиджи',              en:'Fiji' },
+  { code:'WS', flag:'🇼🇸', dial:'+685', continent:'oceania', minLen:7,  maxLen:7,  ky:'Самоа',             ru:'Самоа',              en:'Samoa' },
+  { code:'TO', flag:'🇹🇴', dial:'+676', continent:'oceania', minLen:7,  maxLen:7,  ky:'Тонга',             ru:'Тонга',              en:'Tonga' },
+  { code:'VU', flag:'🇻🇺', dial:'+678', continent:'oceania', minLen:7,  maxLen:7,  ky:'Вануату',           ru:'Вануату',            en:'Vanuatu' },
+  { code:'SB', flag:'🇸🇧', dial:'+677', continent:'oceania', minLen:7,  maxLen:7,  ky:'Соломон аралдары',  ru:'Соломоновы острова', en:'Solomon Islands' },
+  { code:'KI', flag:'🇰🇮', dial:'+686', continent:'oceania', minLen:8,  maxLen:8,  ky:'Кирибати',          ru:'Кирибати',           en:'Kiribati' },
+  { code:'TV', flag:'🇹🇻', dial:'+688', continent:'oceania', minLen:5,  maxLen:6,  ky:'Тувалу',            ru:'Тувалу',             en:'Tuvalu' },
+  { code:'NR', flag:'🇳🇷', dial:'+674', continent:'oceania', minLen:7,  maxLen:7,  ky:'Науру',             ru:'Науру',              en:'Nauru' },
+  { code:'PW', flag:'🇵🇼', dial:'+680', continent:'oceania', minLen:7,  maxLen:7,  ky:'Палау',             ru:'Палау',              en:'Palau' },
+  { code:'MH', flag:'🇲🇭', dial:'+692', continent:'oceania', minLen:7,  maxLen:7,  ky:'Маршалл аралдары',  ru:'Маршалловы острова', en:'Marshall Islands' },
+  { code:'FM', flag:'🇫🇲', dial:'+691', continent:'oceania', minLen:7,  maxLen:7,  ky:'Микронезия',        ru:'Микронезия',         en:'Micronesia' },
+];
+
+export default COUNTRIES;
+
+export function countryName(country, lang) {
+  return country[lang] ?? country.en;
+}
+
+export function groupByContinent(countries = COUNTRIES) {
+  return countries.reduce((acc, c) => {
+    if (!acc[c.continent]) acc[c.continent] = [];
+    acc[c.continent].push(c);
+    return acc;
+  }, {});
+}
+
+/** Валидация номера телефона по стране */
+export function validatePhone(digits, country) {
+  if (!digits || !country) return false;
+  const len = digits.replace(/\D/g, '').length;
+  return len >= country.minLen && len <= country.maxLen;
+}

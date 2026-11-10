@@ -1,0 +1,369 @@
+.reviews-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-top: 64px;
+}
+
+.reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
+
+/* ── Шапка ── */
+.reviews-header {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.reviews-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--text-primary);
+  font-family: 'Georgia', serif;
+  margin: 12px 0 8px;
+}
+
+.reviews-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.reviews-stats {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.reviews-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviews-stat__num {
+  font-size: 32px;
+  font-weight: 900;
+  color: #c9a84c;
+  font-family: 'Georgia', serif;
+  line-height: 1;
+}
+
+.reviews-stat__label {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.reviews-avg-stars {
+  display: flex;
+  gap: 2px;
+}
+
+/* ── Layout ── */
+.reviews-body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── Боковая панель ── */
+.reviews-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 80px;
+}
+
+/* Фильтр */
+.reviews-filter {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.reviews-filter h3 {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.rev-filter-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all .15s;
+  font-family: inherit;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.rev-filter-btn:hover { background: rgba(201,168,76,.08); color: #c9a84c; }
+.rev-filter-btn.active { background: rgba(201,168,76,.18); color: #c9a84c; font-weight: 700; }
+
+/* Форма */
+.reviews-form-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.reviews-form-box h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-family: 'Georgia', serif;
+}
+
+.reviews-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rev-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.rev-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 600;
+}
+
+.rev-input,
+.rev-textarea {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+  resize: vertical;
+}
+
+.rev-input:focus,
+.rev-textarea:focus { border-color: #c9a84c; }
+
+.rev-counter {
+  font-size: 11px;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+
+.rev-stars-pick {
+  display: flex;
+  gap: 4px;
+}
+
+.rev-user-info {
+  font-size: 13px;
+  color: #55a855;
+  margin: 0;
+}
+
+.rev-sent {
+  font-size: 13px;
+  color: #55a855;
+  background: rgba(85,168,85,.1);
+  border: 1px solid rgba(85,168,85,.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+.rev-submit {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* ── Список отзывов ── */
+.reviews-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  transition: border-color .2s, transform .2s;
+}
+
+.review-card:hover {
+  border-color: rgba(201,168,76,.3);
+  transform: translateY(-2px);
+}
+
+.review-card__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.review-card__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.2);
+  color: #c9a84c;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(201,168,76,.3);
+}
+
+.review-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.review-card__name {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.review-card__date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.review-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.review-card__rating-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c9a84c;
+}
+
+.review-card__book {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin-left: auto;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-card__del-wrap {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.review-card__text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rev-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+}
+
+.rev-empty p {
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+/* ── Контактный номер ── */
+.reviews-contact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,.25);
+  border-radius: 10px;
+  padding: 18px 24px;
+  margin-top: 8px;
+}
+
+.reviews-contact__label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.reviews-contact__phone {
+  font-size: 20px;
+  font-weight: 800;
+  color: #c9a84c;
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  letter-spacing: .04em;
+  transition: color .2s;
+}
+
+.reviews-contact__phone:hover { color: #e0bc5e; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .reviews-body {
+    grid-template-columns: 1fr;
+  }
+  .reviews-aside {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-container { padding: 20px 16px 40px; }
+  .review-card__book { display: none; }
+  .reviews-stats { gap: 16px; }
+}

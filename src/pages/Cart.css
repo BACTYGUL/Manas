@@ -55,3 +55,81 @@
   .cart-container { padding: 20px 16px; }
   .cart-item { grid-template-columns: 60px 1fr auto; gap: 10px; padding: 12px; }
 }
+
+/* ── Телефон в форме заказа ── */
+.order-phone-wrap { position: relative; margin-bottom: 0; }
+
+.order-phone-row {
+  display: flex; align-items: stretch;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 6px; overflow: visible; transition: border-color .2s;
+}
+.order-phone-row:focus-within { border-color: #c9a84c; }
+
+.order-phone-country {
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: none; border-right: 1px solid var(--border);
+  padding: 0 10px; cursor: pointer; font-family: inherit;
+  color: var(--text-primary); flex-shrink: 0; min-height: 44px;
+  border-radius: 6px 0 0 6px; transition: background .15s; white-space: nowrap;
+}
+.order-phone-country:hover { background: rgba(201,168,76,.08); }
+.opc-dial  { font-size: 13px; font-weight: 600; }
+.opc-arrow { font-size: 10px; color: var(--text-muted); }
+.order-phone-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+.order-phone-input {
+  flex: 1; border: none; background: transparent;
+  padding: 11px 12px; font-size: 14px; color: var(--text-primary);
+  font-family: inherit; outline: none;
+}
+
+.order-phone-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 500;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.opd-search-wrap { padding: 8px; border-bottom: 1px solid var(--border); }
+.opd-search {
+  width: 100%; box-sizing: border-box;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 12px; font-size: 13px;
+  color: var(--text-primary); font-family: inherit; outline: none;
+}
+.opd-search:focus { border-color: #c9a84c; }
+.opd-list { max-height: 260px; overflow-y: auto; }
+.opd-continent {
+  padding: 5px 12px 3px; font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: #c9a84c;
+  background: rgba(201,168,76,.06); position: sticky; top: 0; z-index: 1;
+}
+.opd-option {
+  width: 100%; background: none; border: none;
+  padding: 8px 12px; display: flex; align-items: center; gap: 8px;
+  cursor: pointer; font-family: inherit; font-size: 13px;
+  color: var(--text-secondary); text-align: left; transition: background .12s;
+}
+.opd-option:hover   { background: rgba(201,168,76,.09); }
+.opd-option.selected{ background: rgba(201,168,76,.18); color: #c9a84c; font-weight: 600; }
+.opd-flag { font-size: 17px; flex-shrink: 0; }
+.opd-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.opd-dial { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+.opd-empty { padding: 14px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+/* ── Поля с ошибками ── */
+.order-field { display: flex; flex-direction: column; gap: 4px; }
+
+.order-form input.field-error,
+.order-form textarea.field-error,
+.order-phone-row.field-error {
+  border-color: #e05555 !important;
+}
+.order-form input.field-error:focus,
+.order-phone-row.field-error:focus-within { border-color: #e05555 !important; }
+
+.field-err-msg {
+  font-size: 12px; color: #e05555; margin: 0;
+  display: flex; align-items: center; gap: 4px;
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }

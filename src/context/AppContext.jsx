@@ -6,6 +6,7 @@ import {
   deleteProduct as apiDeleteProduct,
   fetchOrders,
   createOrder as apiCreateOrder,
+  updateOrder as apiUpdateOrder,
 } from '../api/productsApi';
 import {
   fetchUsers,
@@ -13,8 +14,23 @@ import {
   createUser,
   deleteUser as apiDeleteUser,
 } from '../api/usersApi';
+import {
+  getReviewsByProduct,
+  addReview as apiAddReview,
+  deleteReview as apiDeleteReview,
+  getAllReviews,
+} from '../api/reviewsApi';
+import {
+  getMessages, getAllChats, sendMessage, markRead, countUnread, totalAdminUnread,
+} from '../api/chatApi';
+import {
+  enableGoogleTranslate,
+  disableGoogleTranslate,
+  hideGoogleTranslateToolbar,
+} from '../utils/googleTranslate';
 
-const AppContext = createContext(null);
+
+const AppContext = createContext();
 
 // ─── Учётные данные admin из .env ───────────────────────────────────────────
 const ADMIN_EMAIL    = import.meta.env.VITE_ADMIN_EMAIL;
@@ -39,6 +55,9 @@ const sortOrders = (list = []) => [...list].sort((a, b) => {
 
 export function AppProvider({ children }) {
 
+  // Скрываем GT toolbar сразу при монтировании
+  useEffect(() => { hideGoogleTranslateToolbar(); }, []);
+
   // ── Тема ─────────────────────────────────────────────────────────────────
   const [theme, setTheme] = useState(
     () => localStorage.getItem('manas_theme') || 'dark'
@@ -50,14 +69,56 @@ export function AppProvider({ children }) {
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   // ── Язык ──────────────────────────────────────────────────────────────────
+  // Три встроенных языка (ky/ru/en) — через собственный t().
+  // Остальные 40+ языков — через Google Translate (gtLang).
+  const NATIVE_LANGS = ['ky', 'ru', 'en'];
+
   const [lang, setLang] = useState(
     () => localStorage.getItem('manas_lang') || 'ky'
   );
-  const toggleLang = () => setLang(l => {
-    const next = l === 'ky' ? 'ru' : 'ky';
-    localStorage.setItem('manas_lang', next);
-    return next;
-  });
+
+  // gtLang — код для Google Translate (null = встроенный перевод)
+  const [gtLang, setGtLang] = useState(
+    () => {
+      const saved = localStorage.getItem('manas_gt_lang');
+      return saved || null;
+    }
+  );
+
+  // При изменении gtLang — активируем/деактивируем Google Translate
+  useEffect(() => {
+    if (!gtLang) {
+      // Убираем Google Translate
+      disableGoogleTranslate();
+    } else {
+      // Активируем Google Translate
+      enableGoogleTranslate(gtLang);
+    }
+  }, [gtLang]);
+
+  const setLanguage = useCallback((code) => {
+    if (NATIVE_LANGS.includes(code)) {
+      // Встроенный язык — отключаем GT, ставим свой
+      setLang(code);
+      setGtLang(null);
+      localStorage.setItem('manas_lang', code);
+      localStorage.removeItem('manas_gt_lang');
+      disableGoogleTranslate();
+    } else {
+      // Внешний язык — активируем GT, ставим базовый en для t()
+      setLang('en');
+      setGtLang(code);
+      localStorage.setItem('manas_lang', 'en');
+      localStorage.setItem('manas_gt_lang', code);
+      enableGoogleTranslate(code);
+    }
+  }, []);
+
+  const toggleLang = () => {
+    const order = ['ky', 'ru', 'en'];
+    const next = order[(order.indexOf(lang) + 1) % order.length];
+    setLanguage(next);
+  };
 
   // ── Авторизация ───────────────────────────────────────────────────────────
   const [user, setUser] = useState(() => {
@@ -78,26 +139,28 @@ export function AppProvider({ children }) {
   useEffect(() => { loadUsers(); }, [loadUsers]);
 
   /** Регистрация — сохраняет пользователя в mockapi */
-  const register = async (name, email, password) => {
-    if (email === ADMIN_EMAIL) return { error: 'Бул email катталган' };
-
-    // Проверяем уникальность email через API
+  const register = async (name, email, password, extra = {}) => {
+    if (email === ADMIN_EMAIL) return { errorKey: 'auth_email_taken' };
     try {
       const existing = await findUserByEmail(email);
-      if (existing) return { error: 'Бул email катталган' };
+      if (existing) return { errorKey: 'auth_email_taken' };
     } catch {
-      return { error: 'Серверге байланышуу ката кетти. Кайра аракет кылыңыз.' };
+      return { errorKey: 'auth_server_err' };
     }
-
     try {
-      const created = await createUser({ name, email, password, role: 'user' });
+      const created = await createUser({
+        name, email, password, role: 'user',
+        phone:       extra.phone       || '',
+        countryCode: extra.countryCode || '',
+        passportImg: extra.passportImg || null,
+      });
       const { password: _, ...safe } = created;
       setUser(safe);
       localStorage.setItem('manas_user', JSON.stringify(safe));
       setUsers(prev => [...prev, created]);
       return { success: true };
     } catch {
-      return { error: 'Каттоо учурунда ката кетти. Кайра аракет кылыңыз.' };
+      return { errorKey: 'auth_server_err' };
     }
   };
 
@@ -115,14 +178,14 @@ export function AppProvider({ children }) {
     try {
       const found = await findUserByEmail(email);
       if (!found || found.password !== password) {
-        return { error: 'Email же сырсөз туура эмес' };
+        return { errorKey: 'auth_wrong_creds' };
       }
       const { password: _, ...safe } = found;
       setUser(safe);
       localStorage.setItem('manas_user', JSON.stringify(safe));
       return { success: true };
     } catch {
-      return { error: 'Серверге байланышуу ката кетти. Кайра аракет кылыңыз.' };
+      return { errorKey: 'auth_server_err' };
     }
   };
 
@@ -199,10 +262,9 @@ export function AppProvider({ children }) {
     const newOrder = {
       id: Date.now(),
       createdAt: new Date().toISOString(),
-      status: 'Новый',
+      status: 'new',
       ...orderData,
     };
-
     try {
       const saved = await apiCreateOrder(newOrder);
       const nextOrders = sortOrders([saved, ...orders]);
@@ -214,6 +276,21 @@ export function AppProvider({ children }) {
       setOrders(nextOrders);
       localStorage.setItem('manas_orders', JSON.stringify(nextOrders));
       return newOrder;
+    }
+  };
+
+  /** Обновление статуса заказа (admin) */
+  const updateOrderStatus = async (orderId, newStatus) => {
+    const order = orders.find(o => String(o.id) === String(orderId));
+    if (!order) return;
+    const updated = { ...order, status: newStatus };
+    try { await apiUpdateOrder(orderId, updated); } catch { /* fallback localStorage */ }
+    const next = sortOrders(orders.map(o => String(o.id)===String(orderId) ? updated : o));
+    setOrders(next);
+    localStorage.setItem('manas_orders', JSON.stringify(next));
+    // Добавляем уведомление пользователю
+    if (order.userId) {
+      addNotification(order.userId, { type:'order', orderId, status: newStatus, ts: new Date().toISOString() });
     }
   };
 
@@ -268,32 +345,74 @@ export function AppProvider({ children }) {
     setProducts(prev => prev.filter(p => p.id !== id));
   };
 
-  // ── Отзывы (localStorage, т.к. mockapi не имеет отдельного ресурса) ───────
-  const [allReviews, setAllReviews] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('manas_reviews') || '{}'); } catch { return {}; }
-  });
+  // ── Отзывы ────────────────────────────────────────────────────────────────
+  // Держим в стейте для реактивности, синхронизируем с reviewsApi (localStorage)
+  const [allReviews, setAllReviews] = useState(() => getAllReviews());
 
   const addReview = (productId, review) => {
-    setAllReviews(prev => {
-      const updated = {
-        ...prev,
-        [productId]: [
-          ...(prev[productId] || []),
-          { ...review, id: Date.now(), date: new Date().toLocaleDateString('ru-RU') },
-        ],
-      };
-      localStorage.setItem('manas_reviews', JSON.stringify(updated));
-      return updated;
+    const saved = apiAddReview(productId, review);
+    setAllReviews(getAllReviews());
+    return saved;
+  };
+
+  const deleteReview = (productId, reviewId) => {
+    apiDeleteReview(productId, reviewId);
+    setAllReviews(getAllReviews());
+  };
+
+  const getReviews = (productId) => allReviews[String(productId)] || [];
+
+  // ── Уведомления ──────────────────────────────────────────────────────────
+  const [notifications, setNotifications] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('manas_notif') || '[]'); } catch { return []; }
+  });
+
+  const addNotification = (userId, notif) => {
+    setNotifications(prev => {
+      const next = [{ ...notif, id: Date.now(), userId: String(userId), read: false }, ...prev];
+      localStorage.setItem('manas_notif', JSON.stringify(next));
+      return next;
     });
   };
-  const getReviews = (productId) => allReviews[String(productId)] || [];
+
+  const markNotifRead = (id) => {
+    setNotifications(prev => {
+      const next = prev.map(n => n.id === id ? { ...n, read: true } : n);
+      localStorage.setItem('manas_notif', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const userNotifications = user
+    ? notifications.filter(n => String(n.userId) === String(user.id))
+    : [];
+
+  // ── Чат ──────────────────────────────────────────────────────────────────
+  const [chatState, setChatState] = useState(() => getAllChats());
+
+  const refreshChat = useCallback(() => { setChatState(getAllChats()); }, []);
+
+  const chatSend = (userId, from, text) => {
+    sendMessage(userId, from, text);
+    refreshChat();
+  };
+
+  const chatGetMessages = (userId) => getMessages(userId);
+
+  const chatMarkRead = (userId, from) => {
+    markRead(userId, from);
+    refreshChat();
+  };
+
+  const chatUnreadForUser  = (uid) => countUnread(uid, 'user');
+  const chatUnreadForAdmin = ()    => totalAdminUnread();
 
   return (
     <AppContext.Provider value={{
       // Тема
       theme, toggleTheme,
       // Язык
-      lang, toggleLang,
+      lang, gtLang, setLanguage, toggleLang,
       // Авторизация
       user, users, login, register, logout, loadUsers, deleteUserById,
       // Корзина
@@ -301,12 +420,17 @@ export function AppProvider({ children }) {
       // Избранное
       favorites, toggleFavorite, isFavorite,
       // Заказы
-      orders, createOrder,
+      orders, createOrder, updateOrderStatus,
       // Товары (async)
       products, productsLoading, productsError,
       addProduct, updateProduct, deleteProduct, loadProducts,
       // Отзывы
-      addReview, getReviews,
+      addReview, deleteReview, getReviews,
+      // Уведомления
+      notifications, userNotifications, addNotification, markNotifRead,
+      // Чат
+      chatState, chatSend, chatGetMessages, chatMarkRead,
+      chatUnreadForUser, chatUnreadForAdmin, refreshChat,
     }}>
       {children}
     </AppContext.Provider>

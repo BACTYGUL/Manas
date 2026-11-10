@@ -270,23 +270,68 @@
 .hero-card {
   background: #1a1510;
   border: 1px solid rgba(201,168,76,0.1);
-  border-radius: 10px;
-  padding: 32px 24px 24px;
+  border-radius: 14px;
+  padding: 0;                        /* убрали padding — теперь изображение до краёв */
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.25s, transform 0.25s;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  overflow: hidden;
 }
 
 .hero-card:hover,
 .hero-card--active {
   border-color: var(--hero-color, #c9a84c);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.45);
 }
 
+/* ── Обложка (фото) ── */
+.hero-card__cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+
+.hero-card__img-real {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.hero-card:hover .hero-card__img-real {
+  transform: scale(1.06);
+}
+
+.hero-card__cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(14,11,8,0.75) 100%
+  );
+}
+
+/* SVG-заглушка */
+.hero-card__cover svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Контент под фото ── */
+.hero-card__content {
+  padding: 18px 20px 20px;
+}
+
+/* Убираем старый .hero-card__avatar (заменён на .hero-card__cover) */
 .hero-card__avatar {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
+  display: none;
 }
 
 .hero-card__name {
@@ -686,4 +731,53 @@
   .timeline__dot { display: none; }
   .timeline__item { flex-direction: column; gap: 4px; }
   .timeline__content { padding-left: 0; }
+}
+
+/* ── Убираем лишние отступы в секциях ── */
+.inner-page__section { padding: 40px 0; }
+.inner-page__section--dark { padding: 40px 0; }
+.inner-page__section--quote { padding: 40px 0; }
+
+.inner-page__intro-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 140px;
+}
+.stat-box__num {
+  display: block;
+  font-size: 26px;
+  font-weight: 900;
+  color: #c9a84c;
+  font-family: 'Georgia', serif;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.stat-box__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ── Аватары персонажей ── */
+.hero-avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--hero-color, #c9a84c);
+}
+.hero-card__avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
 }

@@ -1,0 +1,217 @@
+.music-player {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: min(580px, calc(100vw - 32px));
+  background: linear-gradient(135deg, #1a1208 0%, #2a1a08 100%);
+  border: 1px solid rgba(201,168,76,.45);
+  border-radius: 16px;
+  padding: 18px 22px 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.7), 0 0 0 1px rgba(201,168,76,.15);
+  backdrop-filter: blur(8px);
+  animation: mpSlideUp .3s ease;
+}
+
+@keyframes mpSlideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Инфо */
+.mp-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.mp-disc {
+  font-size: 28px;
+  animation: mpSpin 3s linear infinite paused;
+}
+
+.music-player:has(.mp-btn--play:not(:empty)) .mp-disc {
+  animation-play-state: running;
+}
+
+@keyframes mpSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mp-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f0e6cc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Georgia', serif;
+}
+
+.mp-loading {
+  font-size: 16px;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Прогресс */
+.mp-progress-wrap {
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.mp-progress-bg {
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,.12);
+  border-radius: 3px;
+  overflow: visible;
+  margin-bottom: 6px;
+}
+
+.mp-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c9a84c, #e0bc5e);
+  border-radius: 3px;
+  transition: width .1s linear;
+}
+
+.mp-progress-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #c9a84c;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(201,168,76,.8);
+  transition: left .1s linear;
+}
+
+.mp-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #7a6f5e;
+}
+
+/* Кнопки */
+.mp-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mp-btn {
+  background: none;
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 8px;
+  color: #c9a84c;
+  cursor: pointer;
+  transition: all .18s;
+  font-family: inherit;
+  padding: 6px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.mp-btn:hover {
+  background: rgba(201,168,76,.15);
+  border-color: #c9a84c;
+}
+
+.mp-btn--play {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,.15);
+  border: 2px solid #c9a84c;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.mp-btn--play:hover {
+  background: #c9a84c;
+  color: #0e0b08;
+}
+
+.mp-btn--sm {
+  font-size: 11px;
+  padding: 5px 8px;
+}
+
+.mp-btn--close {
+  margin-left: auto;
+  border-color: rgba(224,85,85,.4);
+  color: #e05555;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mp-btn--close:hover {
+  background: rgba(224,85,85,.2);
+  border-color: #e05555;
+}
+
+/* Громкость */
+.mp-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 140px;
+}
+
+.mp-volume span {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.mp-volume-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  background: rgba(255,255,255,.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.mp-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #c9a84c;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mp-volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #c9a84c;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .music-player { padding: 14px 14px 12px; bottom: 12px; }
+  .mp-btn--sm { display: none; }
+  .mp-volume { max-width: 100px; }
+}
